@@ -3,8 +3,8 @@ package logrus_test
 import (
 	"os"
 
+	"github.com/DennisVis/genericr"
 	"github.com/sirupsen/logrus"
-	"github.com/wojas/genericr"
 )
 
 func ExampleLogrus() {

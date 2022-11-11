@@ -7,8 +7,8 @@ import (
 	"runtime"
 	"testing"
 
+	"github.com/DennisVis/genericr"
 	"github.com/go-logr/logr"
-	"github.com/wojas/genericr"
 )
 
 func TestNewForTesting(t *testing.T) {
@@ -87,7 +87,7 @@ func TestLogger_Table(t *testing.T) {
 		},
 		{
 			func() {
-				sink.Info(01, "first")
+				sink.Info(0o1, "first")
 				sink.WithVerbosity(1).Info(1, "hello world", "a", 1)
 			},
 			`[1]  "hello world" a=1`,

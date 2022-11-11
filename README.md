@@ -1,4 +1,4 @@
-[![GoDoc](https://godoc.org/github.com/wojas/genericr?status.svg)](https://godoc.org/github.com/wojas/genericr)
+[![GoDoc](https://godoc.org/github.com/DennisVis/genericr?status.svg)](https://godoc.org/github.com/DennisVis/genericr)
 
 # genericr
 

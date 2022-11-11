@@ -1,4 +1,4 @@
-module github.com/wojas/genericr
+module github.com/DennisVis/genericr
 
 go 1.14
 

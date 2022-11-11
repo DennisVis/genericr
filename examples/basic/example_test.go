@@ -3,7 +3,7 @@ package logrus_test
 import (
 	"fmt"
 
-	"github.com/wojas/genericr"
+	"github.com/DennisVis/genericr"
 )
 
 func ExampleBasic() {
