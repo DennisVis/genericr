@@ -38,6 +38,7 @@ type Entry struct {
 	Name      string        // name parts joined with '.'
 	NameParts []string      // individual name segments
 	Message   string        // message as send to log call
+	IsError   bool          // true if .Error() was called
 	Error     error         // error if .Error() was called
 	Fields    []interface{} // alternating key-value pairs
 
@@ -141,7 +142,7 @@ func (l LogSink) Init(info logr.RuntimeInfo) {
 }
 
 func (l LogSink) Info(level int, msg string, kvList ...interface{}) {
-	l.logMessage(level, nil, msg, kvList)
+	l.logMessage(level, false, nil, msg, kvList)
 }
 
 func (l LogSink) Enabled(level int) bool {
@@ -149,7 +150,7 @@ func (l LogSink) Enabled(level int) bool {
 }
 
 func (l LogSink) Error(err error, msg string, kvList ...interface{}) {
-	l.logMessage(0, err, msg, kvList)
+	l.logMessage(0, true, err, msg, kvList)
 }
 
 func (l LogSink) WithName(name string) logr.LogSink {
@@ -185,7 +186,7 @@ func (l LogSink) WithValues(kvList ...interface{}) logr.LogSink {
 }
 
 // logMessage implements the actual logging for .Info() and .Error()
-func (l LogSink) logMessage(level int, err error, msg string, kvList []interface{}) {
+func (l LogSink) logMessage(level int, isError bool, err error, msg string, kvList []interface{}) {
 	var out []interface{}
 	if len(l.values) == 0 && len(kvList) > 0 {
 		out = kvList
@@ -211,6 +212,7 @@ func (l LogSink) logMessage(level int, err error, msg string, kvList []interface
 		Name:        l.name,
 		NameParts:   l.nameParts,
 		Message:     msg,
+		IsError:     isError,
 		Error:       err,
 		Fields:      out,
 		Caller:      caller,
